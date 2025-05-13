@@ -22,13 +22,15 @@ Em Outras Ordens são exibidas as ordens que não pertencem a sessão atual (usu
 O campo instrumento é o ativo sendo negociado e deve estar igual tanto na ordem de compra quanto na de venda que se deseja testar. Exemplo de preenchimento do formulário:
 
 **Ordem de Compra**
-Instrumento: PETR4
-Lado: Compra
-Preço: 10,00
-Quantidade: 5
+
+> Instrumento: PETR4  
+> Lado: Compra   
+> Preço: 10,00   
+> Quantidade: 5  
 
 **Ordem de Venda**
-Instrumento: PETR4
-Lado: Venda
-Preço: 10,00
-Quantidade: 5
+
+> Instrumento: PETR4   
+> Lado: Venda   
+> Preço: 10,00   
+> Quantidade: 5  
