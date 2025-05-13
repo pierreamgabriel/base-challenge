@@ -2,15 +2,15 @@
 
 Para rodar o projeto, clone o repositório, entre na raíz do projeto e rode os seguinte comandos:
 
-    npm i && npm run dev
+    npm i && npx json-server db.json
 
- Em outra janela do terminal:
-
-    npx json-server db.json
-
-Observe em qual porta o json-server está rodando e vá no arquivo `.env` e faça a alteração da variável:
+Observe em qual porta o json-server está rodando e vá no arquivo `.env` e faça a alteração da variável caso necessário:
 
     VITE_JSON_SERVER_URL=http://localhost:3000
+
+Em outra janela do terminal rode:
+
+    npm run dev
 
 ## Como utilizar
 O sistema utiliza sessões para simular usuários diferentes. Portanto, abra o sistema em duas abas diferentes do seu navegador para testar o cruzamento de ordens vindas de usuários distintos. Por exemplo, numa aba lançar uma ordem de compra de PETR4 e na outra aba lançar uma ordem de venda de PETR4. O sistema irá verificar a compatibilidade entre as ordens e decidir se podem ser executadas.
