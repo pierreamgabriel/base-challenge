@@ -3,9 +3,7 @@ import { createOrder } from "../services/orderService";
 import { getSessionId } from "../utils/session";
 import { Order } from "../types/order";
 
-export function OrderForm({
-  onOrderCreated,
-}: Readonly<{ onOrderCreated: () => void }>) {
+export function OrderForm() {
   const [form, setForm] = useState({
     instrument: "",
     side: "Compra",
@@ -52,7 +50,6 @@ export function OrderForm({
       dateHour: new Date().toISOString(),
     };
     await createOrder(novaOrdem);
-    onOrderCreated();
   }
 
   const formatPriceInput = (value?: number) => {
