@@ -10,11 +10,6 @@ export async function fetchOrders(): Promise<Order[]> {
   return res.data;
 }
 
-export async function fetchOrder(id: string): Promise<Order> {
-  const res = await axios.get(`${API_URL}/${id}`);
-  return res.data;
-}
-
 export async function fetchOrderById(id: string): Promise<Order> {
   const res = await axios.get<Order>(`${API_URL}/${id}`);
   return res.data;
@@ -40,10 +35,8 @@ export async function cancelOrder(id: string): Promise<void> {
     statusHistory: newStatusHistory,
   };
 
-  await fetch(`${API_URL}/${id}`, {
-    method: 'PUT',
+  await axios.put(`${API_URL}/${id}`, JSON.stringify(updatedOrder), {
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(updatedOrder),
   });
 }
 
@@ -99,15 +92,13 @@ export async function createOrder(order: Omit<Order, 'id' | 'status' | 'remainin
       }
     ];
 
-    await fetch(`${API_URL}/${counterpart.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    await axios.put(`${API_URL}/${counterpart.id}`, JSON.stringify({
         ...counterpart,
         remainingQuantity: newCounterpartQtd,
         status: newCounterpartStatus,
         statusHistory: newCounterpartHistory,
-      }),
+      }), {
+      headers: { 'Content-Type': 'application/json' },
     });
 
     newOrder.remainingQuantity -= processedQtd;
@@ -127,10 +118,8 @@ export async function createOrder(order: Omit<Order, 'id' | 'status' | 'remainin
     });
   }
 
-  await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(newOrder),
-  });
+ await axios.post(API_URL, newOrder, {
+  headers: { 'Content-Type': 'application/json' }
+});
 }
 
