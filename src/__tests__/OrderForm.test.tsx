@@ -20,7 +20,7 @@ Object.defineProperty(window, 'crypto', {
 });
 
 describe("OrderForm", () => {
-  const mockOnOrderCreated = jest.fn();
+  
   
   beforeEach(() => {
     jest.clearAllMocks();
@@ -33,7 +33,7 @@ describe("OrderForm", () => {
   });
   
   test("renderiza o formulário corretamente", () => {
-    render(<OrderForm onOrderCreated={mockOnOrderCreated} />);
+    render(<OrderForm />);
     
     expect(screen.getByPlaceholderText("Instrumento")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Preço")).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe("OrderForm", () => {
   });
   
   test("preenche e submete o formulário com sucesso", async () => {
-    render(<OrderForm onOrderCreated={mockOnOrderCreated} />);
+    render(<OrderForm />);
     
     const instrumentInput = screen.getByPlaceholderText("Instrumento");
     fireEvent.change(instrumentInput, { target: { value: "petr4" } });
@@ -69,12 +69,11 @@ describe("OrderForm", () => {
         quantity: 100,
         userSession: "test-session"
       }));
-      expect(mockOnOrderCreated).toHaveBeenCalled();
     });
   });
   
   test("converte o instrumento para maiúsculas", () => {
-    render(<OrderForm onOrderCreated={mockOnOrderCreated} />);
+    render(<OrderForm />);
     
     const instrumentInput = screen.getByPlaceholderText("Instrumento");
     fireEvent.change(instrumentInput, { target: { value: "petr4" } });
@@ -83,7 +82,7 @@ describe("OrderForm", () => {
   });
   
   test("formata o preço corretamente", () => {
-    render(<OrderForm onOrderCreated={mockOnOrderCreated} />);
+    render(<OrderForm />);
     
     const priceInput = screen.getByPlaceholderText("Preço");
     fireEvent.change(priceInput, { target: { value: "2550" } });
