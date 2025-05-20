@@ -38,7 +38,7 @@ export function OrderForm() {
     } else {
       setError({ instrument: false, price: false, quantity: false });
     }
-    const novaOrdem: Order = {
+    const newOrder: Order = {
       id: crypto.randomUUID(),
       userSession: getSessionId(),
       instrument: form.instrument,
@@ -49,7 +49,7 @@ export function OrderForm() {
       status: "Aberta",
       dateHour: new Date().toISOString(),
     };
-    await createOrder(novaOrdem);
+    await createOrder(newOrder);
   }
 
   const formatPriceInput = (value?: number) => {
