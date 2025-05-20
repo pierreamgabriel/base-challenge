@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { OrderList } from "../components/OrderList/OrderList";
+import { act } from "react";
 
 jest.mock("../services/orderService", () => ({
   fetchOrders: jest.fn().mockResolvedValue([])
@@ -14,15 +15,19 @@ describe("OrderList", () => {
     jest.clearAllMocks();
   });
 
-  test("renderiza os títulos principais", () => {
-    render(<OrderList />);
+  test("renderiza os títulos principais", async () => {
+    await act(async () => {
+      render(<OrderList />);
+    });
     
     expect(screen.getByText("Minhas Ordens")).toBeInTheDocument();
     expect(screen.getByText("Outras Ordens")).toBeInTheDocument();
   });
 
-  test("renderiza os campos de filtro", () => {
-    render(<OrderList />);
+  test("renderiza os campos de filtro", async () => {
+    await act(async () => {
+      render(<OrderList />);
+    });
     
     expect(screen.getByPlaceholderText("Filtrar por ID")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Instrumento")).toBeInTheDocument();
@@ -30,8 +35,10 @@ describe("OrderList", () => {
     expect(screen.getByText("Todos os Status")).toBeInTheDocument();
   });
 
-  test("renderiza os cabeçalhos da tabela", () => {
-    render(<OrderList />);
+  test("renderiza os cabeçalhos da tabela", async () => {
+    await act(async () => {
+      render(<OrderList />);
+    });
     
     const headers = [
       "ID", "Instrumento", "Lado", "Preço", 
@@ -43,8 +50,10 @@ describe("OrderList", () => {
     });
   });
 
-  test("exibe mensagem quando não há ordens", () => {
-    render(<OrderList />);
+  test("exibe mensagem quando não há ordens", async () => {
+    await act(async () => {
+      render(<OrderList />);
+    });
     
     const mensagens = screen.getAllByText("Nenhuma ordem encontrada.");
     expect(mensagens.length).toBe(2);
